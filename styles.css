@@ -1,0 +1,396 @@
+:root{
+  --bg1:#ffedf0;
+  --bg2:#fff1f6;
+  --accent:#ff6b81;
+  --card:#ffffff;
+  --muted:#6b6b6b;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+
+body{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: radial-gradient(1200px 600px at 10% 10%, #ffe8f0 0%, rgba(255,255,255,0) 30%),
+              linear-gradient(135deg, var(--bg1), var(--bg2));
+  padding:2rem;
+}
+
+/* Card */
+.player-wrapper{width:100%;max-width:420px}
+.player-card{
+  background:var(--card);
+  border-radius:18px;
+  box-shadow: 0 10px 30px rgba(16,16,16,0.12);
+  padding:20px;
+  text-align:center;
+  overflow:hidden;
+  border: 1px solid rgba(255,107,129,0.06);
+}
+
+/* Cover */
+.cover{
+  width:180px;
+  height:180px;
+  margin:0 auto 12px;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow: 0 6px 18px rgba(16,16,16,0.08);
+}
+.cover img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1);transition:transform .6s ease;}
+
+/* Hover effect when playing (added by script) */
+.player-card.playing .cover img{transform:scale(1.03) rotate(-1deg);}
+
+/* Info text */
+.info h2{margin:6px 0 0;font-size:1.15rem;color:#222}
+.info p{margin:6px 0 0;color:var(--muted);font-size:.95rem}
+
+/* Controls top */
+.controls-top{display:flex;gap:18px;align-items:center;justify-content:center;margin:14px 0}
+.btn{
+  background:transparent;border:0;font-size:1.3rem;cursor:pointer;padding:8px;border-radius:10px;transition:transform .12s ease;
+}
+.btn:active{transform:scale(.96)}
+.play{
+  width:58px;height:58px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#ff8aa0);color:white;font-weight:700;box-shadow:0 6px 16px rgba(255,107,129,0.22);
+}
+
+/* Progress */
+.progress-wrap{padding:6px 12px}
+.progress{
+  background:rgba(0,0,0,0.06);
+  height:10px;border-radius:999px;position:relative;cursor:pointer;
+}
+.progress-bar{
+  width:0%;height:100%;background:linear-gradient(90deg,var(--accent),#ff9fb0);border-radius:999px;transition:width .05s linear;
+}
+.time{display:flex;justify-content:space-between;margin-top:8px;color:var(--muted);font-size:.9rem}
+
+/* Extra controls */
+.extra-controls{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding:0 6px}
+.vol input[type=range]{width:120px}
+.vol{display:flex;align-items:center;gap:6px}
+.heart{font-size:1.1rem}
+
+/* Responsive */
+@media (max-width:420px){
+  .cover{width:140px;height:140px}
+  .controls-top{gap:12px}
+}
+
+
+/* Garante que os elementos fiquem empilhados (um abaixo do outro) */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #0d0d0d; /* opcional: fundo escuro para destacar */
+}
+
+/* Centraliza o player */
+.player-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+/* Ajusta o card do player */
+.player-card {
+  background: #1a1a1a;
+  color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  width: 90%;
+  max-width: 400px;
+}
+
+#message-section {
+  background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%);
+  color: #ffcad4; /* tom suave de rosa */
+  border-radius: 20px;
+  padding: 25px;
+  margin: 40px auto;
+  max-width: 500px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+
+#message-section.visible {
+  opacity: 1;
+}
+
+.message-box {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 192, 203, 0.4);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(255, 192, 203, 0.2);
+}
+
+#typed-message {
+  font-size: 1.3rem;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.7;
+  letter-spacing: 1px;
+  color: #ffe4ec; /* rosa claro */
+  border-right: 2px solid #ffe4ec;
+  animation: blinkCursor 0.8s infinite;
+}
+
+#typed-message {
+  text-shadow: 0 0 8px rgba(255, 192, 203, 0.6), 0 0 15px rgba(255, 192, 203, 0.4);
+}
+
+
+/* ======= CORAÇÕES FLUTUANTES ======= */
+#hearts {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* não atrapalha cliques */
+  overflow: hidden;
+  z-index: 60; /* acima do layout, mas abaixo de modais se necessário */
+}
+
+/* base do coração feito com pseudo-elements */
+.heart {
+  position: absolute;
+  bottom: -60px; /* começa fora da tela */
+  width: 24px;
+  height: 24px;
+  transform: translateX(-50%) rotate(45deg);
+  background: linear-gradient(135deg, #ff6b81, #ff9fb0);
+  opacity: 0.95;
+  border-radius: 4px;
+  will-change: transform, opacity;
+}
+
+/* arredondar os cantos para formar o coração */
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.heart::before { top: -12px; left: 0; }
+.heart::after  { left: 12px; top: 0; }
+
+/* animação principal subindo com leve balanço horizontal */
+@keyframes floatUp {
+  0% {
+    transform: translateX(var(--start-x, 0)) translateY(0) rotate(45deg) scale(var(--s,1));
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(calc(var(--start-x, 0) + var(--sway, 30px))) translateY(-45vh) rotate(45deg) scale(var(--s,1));
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateX(calc(var(--start-x, 0) - var(--sway, 40px))) translateY(-120vh) rotate(45deg) scale(var(--s,1));
+    opacity: 0;
+  }
+}
+
+/* pequenas variações para suavizar visual */
+.heart.small { width: 14px; height: 14px; }
+.heart.small::before,
+.heart.small::after { width: 14px; height: 14px; top: -7px; left: 0; }
+.heart.small::after { left: 7px; top: 0; transform-origin: center; }
+
+/* outra variação */
+.heart.big { width: 34px; height: 34px; }
+.heart.big::before,
+.heart.big::after { width: 34px; height: 34px; top: -17px; left: 0; }
+.heart.big::after { left: 17px; top: 0; }
+
+/* quando o elemento recebe o estilo de animação, aplicamos a keyframe com duração variável */
+.heart.animated {
+  animation-name: floatUp;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1;
+}
+
+/* ======= BOTÃO DE REVELAÇÃO ======= */
+#reveal-section {
+  margin: 50px 0;
+  text-align: center;
+}
+
+#reveal-btn {
+  background: linear-gradient(135deg, #ff8da1, #ffb6c1);
+  color: #fff;
+  border: none;
+  padding: 14px 30px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#reveal-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 182, 193, 0.6);
+}
+
+/* ======= MENSAGEM FINAL ======= */
+#final-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+#final-message.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Caixa da mensagem */
+.final-content {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 192, 203, 0.4);
+  border-radius: 20px;
+  padding: 40px 30px;
+  max-width: 450px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(255, 192, 203, 0.3);
+  color: #ffe4ec;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.4rem;
+  transform: scale(0.9);
+  transition: transform 0.6s ease;
+}
+
+#final-message.show .final-content {
+  transform: scale(1);
+}
+
+/* Botão dentro da mensagem (caso queira fechar futuramente) */
+.final-content button {
+  margin-top: 20px;
+  background: none;
+  border: 1px solid #ffe4ec;
+  color: #ffe4ec;
+  border-radius: 10px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.final-content button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ======= FUNDO ESTRELADO ======= */
+body {
+  background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Camada de estrelas */
+#stars {
+  width: 100%;
+  height: 100%;
+  background: transparent url('https://raw.githubusercontent.com/JulianLaval/canvas-particle-network/master/img/stars.png') repeat top center;
+  position: fixed;
+  z-index: -1;
+  animation: moveStars 100s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes moveStars {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+
+/* ======= FECHAMENTO ======= */
+#closing {
+  text-align: center;
+  color: #ffe4ec;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.3rem;
+  margin-top: 60px;
+  padding-bottom: 60px;
+  animation: fadeIn 2s ease forwards;
+  opacity: 0;
+}
+
+#closing.show {
+  opacity: 1;
+}
+
+#closing span {
+  font-style: italic;
+  font-size: 1.4rem;
+  color: #ffb6c1;
+}
+
+/* Botão de Replay */
+#replay-btn {
+  margin-top: 20px;
+  background: linear-gradient(135deg, #ff8da1, #ffb6c1);
+  color: #fff;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#replay-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 182, 193, 0.6);
+}
+
+/* Animação de aparecimento */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#artist, #title {
+  color: white;
+}

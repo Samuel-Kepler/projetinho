@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Player Romântico — Para Você</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="carrosel.css" />
+</head>
+<body>
+  <main class="player-wrapper">
+    <div class="player-card">
+      <div class="cover">
+        <img id="cover-img" src="/assets/cover 1.jpg" alt="Capa da música" />
+      </div>
+
+      <div class="info">
+        <h2 id="title">Título da Faixa</h2>
+        <p id="artist">Artista</p>
+      </div>
+
+      <div class="controls-top">
+        <button id="prev" class="btn">⏮</button>
+        <button id="play" class="btn play">▶️</button>
+        <button id="next" class="btn">⏭</button>
+      </div>
+
+      <div class="progress-wrap">
+        <div id="progress" class="progress">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        <div class="time">
+          <span id="current">0:00</span>
+          <span id="duration">0:00</span>
+        </div>
+      </div>
+
+      <div class="extra-controls">
+        <label class="vol">
+          🔊
+          <input id="volume" type="range" min="0" max="1" step="0.01" value="0.9" />
+        </label>
+        <button id="heart" class="btn">💖</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Carrossel logo abaixo do player -->
+  <!-- <section id="gallery" class="hidden">
+    <div class="carousel">
+      <div class="slide active">
+        <img src="assets/Sky.jpg" alt="Céu estrelado" />
+        <p class="caption">Cada momento com você tem um brilho especial...</p>
+      </div>
+      <div class="slide">
+        <img src="assets/Fotos De Margaridas.jpg" alt="Pôr do sol" />
+        <p class="caption">Você ilumina meus dias como o sol no horizonte...</p>
+      </div>
+      <div class="slide">
+        <img src="assets/lua.jpg" alt="Lua" />
+        <p class="caption">E quando a noite chega, penso em você sob as estrelas...</p>
+      </div>
+    </div>
+  </section> -->
+
+  <section id="gallery" class="hidden">
+  <div class="carousel">
+    <div class="slide active">
+      <img src="assets/Sky.jpg" alt="Céu estrelado" />
+      <p class="caption">"Cada momento com você tem um brilho especial..."</p>
+    </div>
+    <div class="slide">
+      <img src="assets/Fotos De Margaridas.jpg" alt="Noite calma" />
+      <p class="caption">"Você é a estrela que ilumina meus dias 💫"</p>
+    </div>
+    <div class="slide">
+      <img src="assets/lua.jpg" alt="Coração" />
+      <p class="caption">"E o motivo de cada sorriso meu ❤️"</p>
+    </div>
+  </div>
+</section>
+
+
+    <!-- SEÇÃO DA MENSAGEM -->
+<section id="message-section" class="hidden">
+  <div class="message-box">
+    <p id="typed-message"> Eu te amo</p>
+  </div>
+</section>
+
+
+<!-- container de corações (overlay) -->
+<div id="hearts" aria-hidden="true"></div>
+
+<!-- BOTÃO DE REVELAÇÃO -->
+<section id="reveal-section">
+  <button id="reveal-btn">Clique para saber o que sinto por você 💕</button>
+</section>
+
+<!-- MENSAGEM FINAL -->
+<div id="final-message" class="hidden">
+  <div class="final-content">
+    <p>Eu gosto de você... e queria que soubesse disso. 💞</p>
+  </div>
+</div>
+
+<!-- FECHAMENTO -->
+<footer id="closing">
+  <p>Com carinho,<br><span>Samuel 🌙💫</span></p>
+  <!-- <button id="replay-btn">Rever tudo 🔁</button> -->
+</footer>
+
+<div id="stars"></div>
+
+
+
+  <!-- Áudio (substitua os src por seus arquivos .mp3 e adicione mais objetos se quiser) -->
+  <audio id="audio" src="assets/domingas.mp3"></audio>
+  <!-- Se quiser criar playlist simples -->
+  <script src="script.js"></script>
+</body>
+</html>
